@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.0 - 2025.09.04
+
+- feat: allow http localhost, thanks to [PeterCardenas](https://github.com/PeterCardenas).
+
 ## 2.3.0 - 2023.11.07
 
 - feat: add timestamp to the list.
