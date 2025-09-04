@@ -18,7 +18,7 @@
   "web_accessible_resources": [
     {
       "resources": ["connect-web-interceptor.js", "inject.js"],
-      "matches": ["https://*/*"]
+      "matches": ["https://*/*", "http://*/*"]
     }
   ],
   "content_scripts": [
