@@ -64,6 +64,8 @@ make example-down
 
 grpc-web-devtools now also supports [connect-web](https://github.com/bufbuild/connect-web)!
 
+### Basic Usage
+
 ```ts
 // __CONNECT_WEB_DEVTOOLS__ is loaded in as a script, so it is not guaranteed to be loaded before your code.
 const interceptors: Interceptor[] = window.__CONNECT_WEB_DEVTOOLS__ !== "undefined" ?
@@ -85,6 +87,40 @@ const transport: Transport = createGrpcWebTransport({
 This will also work for the connect protocol
 ```ts
 const transport: Transport = ConnectTransportOptions({
+  baseUrl: getApiHostname(),
+  interceptors,
+});
+```
+
+### Custom JSON Serialization
+
+You can provide a custom `toJson` function to control how messages are serialized:
+
+```ts
+// Define your custom serialization function
+const customToJson = (message) => {
+  // Your custom serialization logic here
+  // For example, you might want to format dates differently or exclude certain fields
+  return {
+    ...message.toJson(),
+    customField: 'customValue',
+  };
+};
+
+// Create an interceptor with your custom toJson function
+const interceptors: Interceptor[] = typeof window.__CREATE_CONNECT_WEB_DEVTOOLS__ !== "undefined" ?
+  [window.__CREATE_CONNECT_WEB_DEVTOOLS__(customToJson)]
+  : [];
+// To get around the fact that __CREATE_CONNECT_WEB_DEVTOOLS__ might not be loaded, we can listen for a custom event,
+// and then push the interceptor to our array once loaded.
+window.addEventListener("connect-web-dev-tools-ready", () => {
+  if (typeof window.__CREATE_CONNECT_WEB_DEVTOOLS__ !== "undefined") {
+    interceptors.push(window.__CREATE_CONNECT_WEB_DEVTOOLS__(customToJson));
+  }
+});
+
+// Use the interceptors in your transport
+const transport: Transport = createGrpcWebTransport({
   baseUrl: getApiHostname(),
   interceptors,
 });
