@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.0 - 2026.03.19
+
+- feat: add support for custom toJson function, thanks to [aidandj](https://github.com/aidandj).
+
 ## 2.4.0 - 2025.09.04
 
 - feat: allow http localhost, thanks to [PeterCardenas](https://github.com/PeterCardenas).

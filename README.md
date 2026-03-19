@@ -5,6 +5,10 @@
 ![gRPC-Web Dev Tools](screenshots/store_light_dark.png)
 Now supports dark mode.
 
+## Extension status
+
+This extension is no longer under active development, but any Pull Request will be reviewed and new versions will be published to the Chrome Web Store if they are approved.
+
 ## Installation
 
 ### Chrome
@@ -33,7 +37,7 @@ or
 
 ## Usage
 
-```javascript
+```js
 const enableDevTools = window.__GRPCWEB_DEVTOOLS__ || (() => {
 });
 const client = new EchoServiceClient('http://myapi.com');
@@ -84,7 +88,9 @@ const transport: Transport = createGrpcWebTransport({
   interceptors,
 });
 ```
+
 This will also work for the connect protocol
+
 ```ts
 const transport: Transport = ConnectTransportOptions({
   baseUrl: getApiHostname(),
